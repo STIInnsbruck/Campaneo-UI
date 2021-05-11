@@ -123,7 +123,6 @@ class RewardTile extends StatelessWidget {
   }
 
   IconData iconForCouponType(couponType type) {
-    print("changing screen.");
     switch(type) {
       case couponType.Fuel:
         couponTypeName = "Reduced-Fuel-Price-Coupon";
