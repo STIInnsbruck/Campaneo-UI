@@ -62,11 +62,15 @@ class _InformationSelectionDialogState extends State<InformationSelectionDialog>
             child: GridView.builder(
                 itemCount: 5,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 3,
+                    crossAxisCount: 4,
                     childAspectRatio: 1.0
                 ),
                 itemBuilder: (BuildContext context, int index) => InformationTile(iconList[index], incrementPoints, widget.currentUser, this.widget.campaignListIndex, index, widget.campaignDetails)
             ),
+          ),
+          Container(
+              alignment: Alignment.bottomLeft,
+              child: backButton(context, height, width)
           ),
           Container(
             alignment: Alignment.bottomRight,
@@ -98,14 +102,13 @@ class _InformationSelectionDialogState extends State<InformationSelectionDialog>
         color: confirmButtonColor,
         child: InkWell(
           child: Center(
-            child: Text("CONFIRM SELECTION", style: TextStyle(fontSize: height / 20)),
+            child: Text("CONFIRM SELECTION", style: TextStyle(fontSize: height / 22)),
           ),
           onTap: () {
             if(this.combinedPoints > 0) {
               widget.currentUser.setCompletedCampaigns(widget.currentUser.getCompletedCampaigns+1);
               widget.currentUser.setPoints(widget.currentUser.getPoints + this.combinedPoints);
               widget.statusCallback(Status.Accepted);
-              //currentUser.newCampaigns[campaignListIndex].status = Status.Accepted;
               widget.currentUser.newCampaigns.removeAt(widget.campaignListIndex);
               widget.campaignDetails.status = Status.Accepted;
               widget.currentUser.acceptedCampaigns.add(widget.campaignDetails);
@@ -119,16 +122,36 @@ class _InformationSelectionDialogState extends State<InformationSelectionDialog>
     );
   }
 
-  Widget infoBox(BuildContext context, double height, double width) {
+  Widget backButton(BuildContext context, double height, double width) {
     return Container(
       height: height * 0.15,
       width: width * 0.25,
       child: Material(
-        color: Colors.green,
-        child: Center(
-          child: Text("SHARED INFORMATION", style: TextStyle(fontSize: height / 20)),
+        color: Colors.grey,
+        child: InkWell(
+          child: Center(
+            child: Text("GO BACK", style: TextStyle(fontSize: height / 22)),
+          ),
+          onTap: () {
+            combinedPoints = 0;
+            widget.campaignDetails.sensorList.forEach((element) {element.selected = false;});
+            Navigator.of(context).pop();
+          },
         ),
-      )
+      ),
+    );
+  }
+
+  Widget infoBox(BuildContext context, double height, double width) {
+    return Container(
+        height: height * 0.15,
+        width: width * 0.25,
+        child: Material(
+          color: Colors.green,
+          child: Center(
+            child: Text("SHARED INFORMATION", style: TextStyle(fontSize: height / 20)),
+          ),
+        )
     );
   }
 

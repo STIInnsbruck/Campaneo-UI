@@ -12,7 +12,7 @@ import 'package:campaneo_app/widgets/status_widget.dart';
 /// widgets can be displayed in.
 
 class InformationTile extends StatelessWidget {
-  
+
   var random = new Random();
   final IconData iconData;
   Function(int) addPoints;
@@ -48,17 +48,17 @@ class InformationTile extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Icon(this.iconData, size: width / 6, color: HexColor("#3C3C3C")),
+                Icon(this.iconData, size: width / 10, color: HexColor("#3C3C3C")),
                 Row(
                   //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Text("${currentCampaign.sensorList[index].points} PTS", style: TextStyle(fontSize: height / 15, color: HexColor("#3C3C3C"))),
+                    Text("${currentCampaign.sensorList[index].points} PTS", style: TextStyle(fontSize: height / 20, color: HexColor("#3C3C3C"))),
                     Spacer(),
                     IconButton(
-                        icon: Icon(Icons.info, size: height / 15, color: HexColor("#3C3C3C")),
+                        icon: Icon(Icons.info, size: height / 20, color: HexColor("#3C3C3C")),
                         padding: EdgeInsets.all(0),
                         onPressed: () => {showCampaignInfo(context)}),
-                    Container(width: 20)
+                    //Container(width: 10)
                   ],
                 ),
               ],

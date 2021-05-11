@@ -13,11 +13,11 @@ import 'package:campaneo_app/data/user.dart';
 class CampaignInfoDialog extends StatelessWidget {
 
   /**final String campaigner;
-  final String title;
-  final String description;
-  final String phoneNumber;
-  final String address;
-  final String email;*/
+      final String title;
+      final String description;
+      final String phoneNumber;
+      final String address;
+      final String email;*/
 
   Campaign campaignDetails;
   BuildContext context;
@@ -44,45 +44,57 @@ class CampaignInfoDialog extends StatelessWidget {
     return Container(
       height: height * 0.85,
       width: width * 0.80,
-      padding: EdgeInsets.fromLTRB(40, 10, 40, 10),
       decoration: BoxDecoration(
         color: HexColor("#3C3C3C"),
       ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      child: Stack(
         children: [
-          Text(this.campaignDetails.name, style: TextStyle(fontSize: height / 20, color: Colors.white70), textAlign: TextAlign.center),
-          Text(this.campaignDetails.organization.name, style: TextStyle(fontSize: height / 40, color: Colors.white70)),
           Container(
-            height: height * 0.3,
-            child: Scrollbar(
-              child: SingleChildScrollView(
-                child: Text(this.campaignDetails.description, style: TextStyle(fontSize: height / 30, color: Colors.white70)),
-                scrollDirection: Axis.vertical,
-              ),
-            )
-          ),
-          Container(
-            alignment: Alignment.centerLeft,
+            padding: EdgeInsets.fromLTRB(40, 10, 40, 10),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                campaignerDetailRow(Icons.home, this.campaignDetails.organization.address.getPrintableAddress(), height),
-                campaignerDetailRow(Icons.phone, this.campaignDetails.organization.phone, height),
-                campaignerDetailRow(Icons.mail_outline, this.campaignDetails.organization.email, height)
-                //Text(this.campaignDetails.organization.address.getPrintableAddress(), style: TextStyle(fontSize: height / 40, color: Colors.white70)),
-                //Text(this.campaignDetails.organization.phone, style: TextStyle(fontSize: height / 40, color: Colors.white70)),
-                //Text(this.campaignDetails.organization.email, style: TextStyle(fontSize: height / 40, color: Colors.white70)),
+                Text(this.campaignDetails.name, style: TextStyle(fontSize: height / 20, color: Colors.white70), textAlign: TextAlign.center),
+                Text(this.campaignDetails.organization.name, style: TextStyle(fontSize: height / 40, color: Colors.white70)),
+                Container(
+                    height: height * 0.3,
+                    child: Scrollbar(
+                      child: SingleChildScrollView(
+                        child: Text(this.campaignDetails.description, style: TextStyle(fontSize: height / 30, color: Colors.white70)),
+                        scrollDirection: Axis.vertical,
+                      ),
+                    )
+                ),
+                Container(
+                  alignment: Alignment.centerLeft,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      campaignerDetailRow(Icons.home, this.campaignDetails.organization.address.getPrintableAddress(), height),
+                      campaignerDetailRow(Icons.phone, this.campaignDetails.organization.phone, height),
+                      campaignerDetailRow(Icons.mail_outline, this.campaignDetails.organization.email, height)
+                    ],
+                  ),
+                ),
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    continueButton(context, height, width),
+                    isAcceptedCampaign()? revokeButton(context, height, width) : declineButton(context, height, width)
+                  ],
+                ),
               ],
             ),
           ),
-
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              continueButton(context, height, width),
-              isAcceptedCampaign()? revokeButton(context, height, width) : declineButton(context, height, width)
-            ],
+          Container(
+              alignment: Alignment.topRight,
+              child: IconButton(
+                  icon: Icon(Icons.close, color: Colors.white70, size: 30),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  }
+              )
           ),
         ],
       ),
@@ -99,7 +111,7 @@ class CampaignInfoDialog extends StatelessWidget {
     }
     return false;
   }
-  
+
   Widget campaignerDetailRow(IconData iconData, String text, height) {
     return Row(
       children: [
