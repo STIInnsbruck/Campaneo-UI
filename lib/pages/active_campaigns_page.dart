@@ -18,6 +18,7 @@ class ActiveCampaignsPage extends StatefulWidget {
 
 class _ActiveCampaignsPageState extends State<ActiveCampaignsPage> {
   List<User> userList;
+  bool liveView = false;
 
   @override
   Widget build(BuildContext context) {
@@ -38,8 +39,16 @@ class _ActiveCampaignsPageState extends State<ActiveCampaignsPage> {
           margin: EdgeInsets.fromLTRB(10, 10, 10, 10),
           alignment: Alignment.bottomRight,
           child: ElevatedButton(
-            onPressed: () => { print("LIVE VIEW PRESSED.") },
-            child: Text("LIVE VIEW", style: TextStyle(fontSize: 40)),
+            onPressed: () {
+              print("LIVE VIEW PRESSED.");
+              setState(() {
+                liveView = !liveView;
+              });
+              },
+            child: liveView == false ?
+              Text("LIVE VIEW", style: TextStyle(fontSize: 40))
+                :
+              Text("TILE VIEW", style: TextStyle(fontSize: 40)),
           ),
         )
       ],
