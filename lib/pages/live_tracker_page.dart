@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:campaneo_app/data/user.dart';
+import 'package:webview_flutter/webview_flutter.dart';
+import 'dart:io';
 
 
 class LiveTrackerPage extends StatefulWidget {
@@ -18,7 +20,18 @@ class _LiveTrackerPageState extends State<LiveTrackerPage> {
   List<User> userList;
 
   @override
+  void initState() {
+    super.initState();
+
+    if (Platform.isAndroid) WebView.platform = SurfaceAndroidWebView();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Container();
+    return Container(
+      child: WebView(
+        initialUrl: 'https://flutter.dev',
+      ),
+    );
   }
 }

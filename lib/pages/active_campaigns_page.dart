@@ -9,8 +9,9 @@ class ActiveCampaignsPage extends StatefulWidget {
   static const String routeName = '/activecampaigns';
   static const String pageTitle = 'ActiveCampaigns';
   User currentUser;
+  Function(int) changeScreen;
 
-  ActiveCampaignsPage(this.currentUser);
+  ActiveCampaignsPage(this.currentUser, this.changeScreen);
 
   @override
   _ActiveCampaignsPageState createState() => _ActiveCampaignsPageState();
@@ -43,6 +44,7 @@ class _ActiveCampaignsPageState extends State<ActiveCampaignsPage> {
               print("LIVE VIEW PRESSED.");
               setState(() {
                 liveView = !liveView;
+                widget.changeScreen(6);
               });
               },
             child: liveView == false ?

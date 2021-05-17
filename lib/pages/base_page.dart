@@ -10,6 +10,7 @@ import 'package:campaneo_app/faker/fake_users.dart';
 import 'package:campaneo_app/data/user.dart';
 import 'package:campaneo_app/data/models.dart';
 import 'package:campaneo_app/pages/active_campaigns_page.dart';
+import 'package:campaneo_app/pages/live_tracker_page.dart';
 
 class BasePage extends StatefulWidget {
   @override
@@ -101,7 +102,10 @@ class _BasePageState extends State<BasePage> {
           _selectedPage = RankingPage(userList, currentUser);
           break;
         case 5:
-          _selectedPage = ActiveCampaignsPage(currentUser);
+          _selectedPage = ActiveCampaignsPage(currentUser, changeScreen);
+          break;
+        case 6:
+          _selectedPage = LiveTrackerPage(currentUser);
       }
     });
   }
