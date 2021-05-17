@@ -30,7 +30,9 @@ class _LiveTrackerPageState extends State<LiveTrackerPage> {
   Widget build(BuildContext context) {
     return Container(
       child: WebView(
-        initialUrl: 'https://flutter.dev',
+        initialUrl: 'https://stiinnsbruck.github.io/CampaNeoViz/campaign_network_d3/dist/index.html',
+        javascriptMode: JavascriptMode.unrestricted,
+
       ),
     );
   }
