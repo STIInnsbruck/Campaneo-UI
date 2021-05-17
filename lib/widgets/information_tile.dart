@@ -28,8 +28,6 @@ class InformationTile extends StatelessWidget {
     this.points = (random.nextDouble() * (10 - 1) + 1).floor();
   }
 
-  //TODO: add ontap-function, all tiles have a different screen to navigate to
-
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
