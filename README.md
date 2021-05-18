@@ -9,3 +9,4 @@ An application to build a trusted platform for sensor data sharing and raising a
 - Requested sensors are hard-coded and not retrieved from KG.
 - Consenting not done in KG, only locally on app.
 - Livetracker only works for Android.
+- When navigating to LiveTracker -> Add in the user ID (once implemented) to get that specific user's live tracking view
