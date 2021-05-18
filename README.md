@@ -1,13 +1,11 @@
 # campaneo_app
 
-An application to build a trusted platform for sensor data sharing.
+An application to build a trusted platform for sensor data sharing and raising a user's awareness about their GDPR rights.
 
-## To-Do:
+## Current limitations:
 
-- Differentiate ActiveCampaign page and NewCampaignPage by listing only the requested campaigns.
-- Adjust themeManager to the user's entered colour theme.
-- Edit Campaign class to have specific sensors. Currently the sensors are given from outside.
-
-Flutter Documentation for further help:
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- Campaign expiration dates are not taken into consideration.
+- Colour theme switching not supported (make us of themeManager).
+- Requested sensors are hard-coded and not retrieved from KG.
+- Consenting not done in KG, only locally on app.
+- Livetracker only works for Android.
