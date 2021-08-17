@@ -9,7 +9,7 @@ class CampaignFetch {
   """;
 
   static final String fetchById = """
-{
+query (\$id: String!) {
       getCampaign2 (campaign_id: \$id) {
         __typename
         id
