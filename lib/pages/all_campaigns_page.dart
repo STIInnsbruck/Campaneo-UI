@@ -44,7 +44,7 @@ class _AllCampaignsPageState extends State<AllCampaignsPage> {
             );
           }
           // ignore: missing_return
-          List newCampaigns = result.data['getCampaigns'];
+          List newCampaigns = result.data['getCreatedCampaigns2'];
           for (int i = 0; i < newCampaigns.length; i++) {
             widget.currentUser.newCampaigns.add(Campaign.fromLazyCacheMap(newCampaigns[i]));
           }

@@ -1,7 +1,7 @@
 class CampaignFetch {
   static final String fetchAll = """
     query { 
-      getCampaigns {
+      getCreatedCampaigns2 {
         id
         name
       } 
@@ -9,8 +9,8 @@ class CampaignFetch {
   """;
 
   static final String fetchById = """
-    query (\$id: String!) {
-      getCampaign (campaign_id: \$id) {
+{
+      getCampaign2 (campaign_id: \$id) {
         __typename
         id
         description
