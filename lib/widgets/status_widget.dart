@@ -20,7 +20,7 @@ class StatusWidget extends StatelessWidget {
     return Container(
       child: CircleAvatar(
         backgroundColor: _statusColor(this.status),
-        radius: height / 25,
+        radius: height / 30,
         child: _statusIcon(this.status, height),
       ),
     );
@@ -45,13 +45,13 @@ class StatusWidget extends StatelessWidget {
   Widget _statusIcon(Status s, double height) {
     switch(s) {
       case Status.New:
-        return Text('?', style: TextStyle(fontSize: height / 20, color: Colors.black54, fontFamily: 'default', fontWeight: FontWeight.bold));
+        return Text('?', style: TextStyle(fontSize: height / 25, color: Colors.black54, fontFamily: 'default', fontWeight: FontWeight.bold));
         break;
       case Status.Accepted:
-        return Icon(Icons.check, size: height / 20);
+        return Icon(Icons.check, size: height / 25);
         break;
       case Status.Rejected:
-        return Icon(Icons.not_interested, size: height / 20);
+        return Icon(Icons.not_interested, size: height / 25);
         break;
     }
   }
