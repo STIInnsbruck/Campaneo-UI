@@ -102,7 +102,7 @@ class _InformationSelectionDialogState extends State<InformationSelectionDialog>
         color: confirmButtonColor,
         child: InkWell(
           child: Center(
-            child: Text("CONFIRM SELECTION", style: TextStyle(fontSize: height / 22)),
+            child: Text("CONFIRM SELECTION", style: TextStyle(fontSize: height / 22), textAlign: TextAlign.center),
           ),
           onTap: () {
             if(this.combinedPoints > 0) {

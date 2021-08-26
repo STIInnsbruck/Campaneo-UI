@@ -101,7 +101,7 @@ class ActiveCampaignInfoDialog extends StatelessWidget {
         color: Colors.green,
         child: InkWell(
           child: Center(
-            child: Text("CONTINUE", style: TextStyle(fontSize: height / 10)),
+            child: Text("CONTINUE", style: TextStyle(fontSize: width / 18)),
           ),
           onTap: () => { showInformationSelection(context, currentUser, statusCallback, campaignDetails) },
         ),
@@ -117,7 +117,7 @@ class ActiveCampaignInfoDialog extends StatelessWidget {
         color: Colors.deepOrangeAccent,
         child: InkWell(
           child: Center(
-            child: Text("REVOKE", style: TextStyle(fontSize: height / 10)),
+            child: Text("REVOKE", style: TextStyle(fontSize: width / 18)),
           ),
           onTap: () {
             campaignDetails.status = Status.Rejected;

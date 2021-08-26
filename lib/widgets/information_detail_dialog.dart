@@ -62,7 +62,7 @@ class InformationDetailDialog extends StatelessWidget {
         color: Colors.grey,
         child: InkWell(
           child: Center(
-            child: Text("GO BACK", style: TextStyle(fontSize: height / 10)),
+            child: Text("GO BACK", style: TextStyle(fontSize: width / 18)),
           ),
           onTap: () => { Navigator.pop(context) },
         ),
