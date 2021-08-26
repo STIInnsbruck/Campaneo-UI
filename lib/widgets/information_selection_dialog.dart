@@ -109,9 +109,9 @@ class _InformationSelectionDialogState extends State<InformationSelectionDialog>
               widget.currentUser.setCompletedCampaigns(widget.currentUser.getCompletedCampaigns+1);
               widget.currentUser.setPoints(widget.currentUser.getPoints + this.combinedPoints);
               widget.statusCallback(Status.Accepted);
+              widget.currentUser.acceptedCampaigns.add(widget.currentUser.newCampaigns[widget.campaignListIndex]);
               widget.currentUser.newCampaigns.removeAt(widget.campaignListIndex);
               widget.campaignDetails.status = Status.Accepted;
-              widget.currentUser.acceptedCampaigns.add(widget.campaignDetails);
               Navigator.of(context).pop();
               Navigator.of(context).pop();
             }
