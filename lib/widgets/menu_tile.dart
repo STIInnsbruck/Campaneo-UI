@@ -32,7 +32,7 @@ class MenuTile extends StatelessWidget {
         child: InkWell(
           child: Column(
             children: <Widget>[
-              Text(this.title, style: TextStyle(color: Colors.white, fontSize: smallestScreenSize / 12)),
+              Text(this.title, style: TextStyle(color: Colors.white, fontSize: smallestScreenSize / 12), textAlign: TextAlign.center),
               Spacer(flex: 2),
               this.widget,
               Spacer(flex: 4),
