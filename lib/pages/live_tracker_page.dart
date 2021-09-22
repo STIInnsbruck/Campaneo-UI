@@ -32,7 +32,6 @@ class _LiveTrackerPageState extends State<LiveTrackerPage> {
       child: WebView(
         initialUrl: 'https://stiinnsbruck.github.io/CampaNeoViz/campaign_network_d3/dist/index.html',
         javascriptMode: JavascriptMode.unrestricted,
-
       ),
     );
   }
