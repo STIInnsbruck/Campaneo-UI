@@ -23,6 +23,7 @@ class _LiveTrackerPageState extends State<LiveTrackerPage> {
   void initState() {
     super.initState();
 
+
     if (Platform.isAndroid) WebView.platform = SurfaceAndroidWebView();
   }
 
