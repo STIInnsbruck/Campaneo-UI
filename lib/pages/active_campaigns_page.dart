@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:campaneo_app/widgets/campaign_tile.dart';
 import 'package:campaneo_app/data/user.dart';
+import 'dart:html' as html;
 
 import '../data/campaign_fetch.dart';
 
@@ -43,8 +44,13 @@ class _ActiveCampaignsPageState extends State<ActiveCampaignsPage> {
             onPressed: () {
               print("LIVE VIEW PRESSED.");
               setState(() {
-                liveView = !liveView;
-                widget.changeScreen(6);
+                html.window.open('https://stiinnsbruck.github.io/CampaNeoViz/campaign_network_d3/dist/index.html', "live tracker");
+                /**if(Platform.isAndroid) {
+                    liveView = !liveView;
+                    widget.changeScreen(6);
+                    } else {
+                    html.window.open('https://stiinnsbruck.github.io/CampaNeoViz/campaign_network_d3/dist/index.html', "live tracker");
+                    }*/
               });
               },
             child: liveView == false ?
