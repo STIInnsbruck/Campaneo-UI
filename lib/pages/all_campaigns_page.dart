@@ -25,44 +25,7 @@ class _AllCampaignsPageState extends State<AllCampaignsPage> {
 
   @override
   Widget build(BuildContext context) {
-    return widget.currentUser.newCampaigns.isEmpty
-        ? Query(
-        options: QueryOptions(
-          documentNode: gql(CampaignFetch.fetchAll),
-        ),
-        // ignore: missing_return
-        builder: (QueryResult result,
-            {VoidCallback refetch, FetchMore fetchMore}) {
-          if (result.hasException) {
-            return Text(result.exception.toString());
-          }
-          if (result.loading) {
-            return Center(
-              child: CircularProgressIndicator(
-                strokeWidth: 5,
-              ),
-            );
-          }
-          // ignore: missing_return
-          List newCampaigns = result.data['getCampaigns'];
-          for (int i = 0; i < newCampaigns.length; i++) {
-            widget.currentUser.newCampaigns.add(Campaign.fromLazyCacheMap(newCampaigns[i]));
-          }
-          return widget.currentUser.newCampaigns.isNotEmpty
-              ? Scrollbar(
-            child: GridView.builder(
-              itemCount: widget.currentUser.newCampaigns.length,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3,
-                  childAspectRatio: 1.85
-              ),
-              itemBuilder: (context, int index) =>
-                  CampaignTile(context, index, widget.currentUser.newCampaigns[index], widget.currentUser, updateList),
-            ),
-          )
-              : Container();
-        }
-    ) : Scrollbar(
+    return Scrollbar(
       child: GridView.builder(
         itemCount: widget.currentUser.newCampaigns.length,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -78,16 +41,45 @@ class _AllCampaignsPageState extends State<AllCampaignsPage> {
         context: context,
         removeTop: true,
         child: Scrollbar(
-          child: GridView.builder(
-            itemCount: 20,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3,
-                  childAspectRatio: 1.85
-              ),
-              itemBuilder: (BuildContext context, int index) => CampaignTile('Verkehrsanalyse in Innsbruck $index')
-          ),
+        child: GridView.builder(
+        itemCount: 20,
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 3,
+        childAspectRatio: 1.85
         ),
-    );*/
+        itemBuilder: (BuildContext context, int index) => CampaignTile('Verkehrsanalyse in Innsbruck $index')
+        ),
+        ),
+        );*/
+  }
+
+  void setOldVersionCampaigns() {
+    setState(() {
+      Address tyrolAddr = Address(
+          country: "Austria",
+          city: "Innsbruck",
+          number: "1",
+          street: "Haupstraße 1"
+      );
+
+      Organization tyrolgov = Organization(
+          name: "Tyrol Government",
+          email: "tirolatgov.at",
+          address: tyrolAddr,
+          phone: "+43512 9079186"
+      );
+
+      Campaign driveSmart = new Campaign(
+          id: "Drive Smart",
+          name: "Drive Smart",
+          description: "New investments in sidealks, bike lanes, and other improvements are supporting more walking and bicycling in Tyrol. Officials are making safety a priority since pedestrians and bicyclists currently account for more than a quarter of the total traffic fatalities in the region.",
+          gdprClassification: "classification",
+          imageUrl: "imageUrl",
+          organization: tyrolgov,
+          validFrom: "10.02.2021",
+          validTo: "10.02.2022"
+      );
+    });
   }
 
   updateList() {

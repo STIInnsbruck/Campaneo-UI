@@ -7,7 +7,7 @@ const String URI_INT = 'https://campaneo.herokuapp.com/graphql';
 const String URI_DEV = 'http://localhost:9002/graphql';
 
 class ApiClient {
-  static final HttpLink httpLink = HttpLink(uri: URI_INT);
+  static final HttpLink httpLink = HttpLink(uri: URI_DEV);
 
   static ValueNotifier<GraphQLClient> initClient() => ValueNotifier(
     GraphQLClient(
