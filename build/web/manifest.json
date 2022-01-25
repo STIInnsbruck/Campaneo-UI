@@ -1,6 +1,6 @@
 {
-    "name": "demoexample",
-    "short_name": "demoexample",
+    "name": "campaneouidemo",
+    "short_name": "campaneouidemo",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
