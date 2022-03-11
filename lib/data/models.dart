@@ -12,6 +12,7 @@ class Campaign {
   String validFrom;
   String validTo;
   String gdprClassification;
+  String organizationId;
   Organization organization;
   Status status = Status.New;
   List<Sensor> sensorList = new FakeSensors().sensorList;
@@ -24,6 +25,7 @@ class Campaign {
     this.validFrom,
     this.validTo,
     this.gdprClassification,
+    this.organizationId,
     this.organization,
   });
 
@@ -35,9 +37,8 @@ class Campaign {
         this.validFrom = map['valid_from'],
         this.validTo = map['valid_to'],
         this.gdprClassification = map['gdpr_classification'],
-        this.organization = (map['organization'] != null)
-            ? Organization.fromLazyCacheMap(map['organization'])
-            : null;
+        this.organizationId = map['organization'],
+        this.organization = map['organization'];
 
   String _getFormattedDate(String date) =>
       DateFormat("dd-MM-yyyy").format(DateTime.parse(date));
@@ -47,15 +48,17 @@ class Campaign {
 }
 
 class Organization {
+  final String id;
   final String name;
   final String email;
   final String phone;
   final Address address;
 
-  Organization({this.name, this.email, this.phone, this.address});
+  Organization({this.id, this.name, this.email, this.phone, this.address});
 
   Organization.fromLazyCacheMap(LazyCacheMap map)
-      : this.name = map['name'],
+      : this.id = map['id'],
+        this.name = map['name'],
         this.email = map['contact_email'],
         this.phone = map['phone_number'],
         this.address = Address(
@@ -68,12 +71,13 @@ class Organization {
 class Address {
   final String country;
   final String city;
+  final String postCode;
   final String street;
   final String number;
 
-  Address({this.street, this.number, this.city, this.country});
+  Address({this.street, this.number, this.city, this.country, this.postCode});
 
   String getPrintableAddress() {
-    return '${this.street} ${this.number}, ${this.city}. ${this.country}';
+    return '${this.street} ${this.number}, ${this.city}, ${this.postCode}. ${this.country}';
   }
 }
