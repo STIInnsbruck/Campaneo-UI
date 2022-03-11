@@ -4,6 +4,11 @@ import 'dart:convert';
 import 'response_parser.dart';
 import 'models.dart';
 
+//The three REST API endpoints.
+const String accessUrl = 'access.campaneo.vwn.cloud';
+const String databrokerUrl = 'databroker.campaneo.vwn.cloud';
+const String managementUrl = 'management.campaneo.vwn.cloud';
+
 class RestApiClient {
 
   static final String kHost = 'management.campaneo.vwn.cloud';
