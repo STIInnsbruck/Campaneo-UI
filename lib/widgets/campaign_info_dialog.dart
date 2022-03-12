@@ -59,23 +59,19 @@ class CampaignInfoDialog extends StatelessWidget {
                             height: height * 0.3,
                             child: Scrollbar(
                               child: SingleChildScrollView(
-                                child: Text(this.campaign.description, style: TextStyle(fontSize: height / 30, color: Colors.white70)),
+                                child: Text(this.campaign.description, style: TextStyle(fontSize: height / 40, color: Colors.white70)),
                                 scrollDirection: Axis.vertical,
                               ),
                             )
                         ),
-                        Container(
-                          alignment: Alignment.centerLeft,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              campaignerDetailRow(Icons.home, this.campaign.organization.address.getPrintableAddress(), height),
-                              campaignerDetailRow(Icons.phone, this.campaign.organization.phone, height),
-                              campaignerDetailRow(Icons.mail_outline, this.campaign.organization.email, height)
-                            ],
-                          ),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            organizationDetails(height),
+                            campaignTimeDetails(height)
+                          ],
                         ),
-
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -107,6 +103,34 @@ class CampaignInfoDialog extends StatelessWidget {
     );
   }
 
+  Widget organizationDetails(double height) {
+    return Container(
+      alignment: Alignment.centerLeft,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text("Organisation Details:", style: TextStyle(color: Colors.white70)),
+          campaignerDetailRow(Icons.home, this.campaign.organization.address.getPrintableAddress(), height),
+          campaignerDetailRow(Icons.phone, this.campaign.organization.phone, height),
+          campaignerDetailRow(Icons.mail_outline, this.campaign.organization.email, height)
+        ],
+      ),
+    );
+  }
+
+  Widget campaignTimeDetails(double height) {
+    return Container(
+      alignment: Alignment.centerLeft,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text("Campaign Time Details:", style: TextStyle(color: Colors.white70)),
+          campaignerDetailRow(Icons.calendar_today, this.campaign.getDateRange(), height)
+        ],
+      )
+    );
+  }
+
   bool isAcceptedCampaign() {
     if(currentUser.acceptedCampaigns.length > 0) {
       if (currentUser.acceptedCampaigns.any((element) => element.id == campaign.id) == true) {
@@ -123,7 +147,7 @@ class CampaignInfoDialog extends StatelessWidget {
       children: [
         Icon(iconData),
         Container(width: 5),
-        Text(text, style: TextStyle(fontSize: height / 40, color: Colors.white70)),
+        Text(text, style: TextStyle(fontSize: height / 60, color: Colors.white70)),
       ],
     );
   }
