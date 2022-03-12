@@ -12,13 +12,6 @@ import 'package:campaneo_app/data/user.dart';
 
 class CampaignInfoDialog extends StatelessWidget {
 
-  /**final String campaigner;
-      final String title;
-      final String description;
-      final String phoneNumber;
-      final String address;
-      final String email;*/
-
   Campaign campaignDetails;
   BuildContext context;
   List<User> userList;
