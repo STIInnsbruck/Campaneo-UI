@@ -15,12 +15,11 @@ class CampaignInfoDialog extends StatelessWidget {
   Campaign campaignDetails;
   BuildContext context;
   List<User> userList;
-  List newCampaignsList;
   User currentUser;
   int index;
   Function statusCallback;
 
-  CampaignInfoDialog(this.campaignDetails, this.context, this.currentUser, this.newCampaignsList, this.index, this.statusCallback);
+  CampaignInfoDialog(this.campaignDetails, this.context, this.currentUser, this.index, this.statusCallback);
 
   @override
   Widget build(context) {
