@@ -42,9 +42,10 @@ class QueryableCampaignDetails extends StatelessWidget {
         }
         final data = result.data['getCampaign2'];
         final campaignDetails = Campaign.fromLazyCacheMap(data);
-        return CampaignInfoDialog(
+        return Container();
+        /**return CampaignInfoDialog(
           campaignDetails, context, currentUser, newCampaignsList, index, statusCallback
-        );
+        );*/
       },
     );
   }
