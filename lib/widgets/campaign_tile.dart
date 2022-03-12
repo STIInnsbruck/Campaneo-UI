@@ -14,7 +14,6 @@ import 'package:campaneo_app/data/user.dart';
 class CampaignTile extends StatefulWidget {
 
   Campaign campaign;
-  //final String title;
   List newCampaignsList;
   User currentUser;
   int index;
