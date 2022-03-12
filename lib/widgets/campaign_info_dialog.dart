@@ -12,14 +12,14 @@ import 'package:campaneo_app/data/user.dart';
 
 class CampaignInfoDialog extends StatelessWidget {
 
-  Campaign campaignDetails;
+  Campaign campaign;
   BuildContext context;
   List<User> userList;
   User currentUser;
   int index;
   Function statusCallback;
 
-  CampaignInfoDialog(this.campaignDetails, this.context, this.currentUser, this.index, this.statusCallback);
+  CampaignInfoDialog(this.campaign, this.context, this.currentUser, this.index, this.statusCallback);
 
   @override
   Widget build(context) {
@@ -46,13 +46,13 @@ class CampaignInfoDialog extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Text(this.campaignDetails.name, style: TextStyle(fontSize: height / 20, color: Colors.white70), textAlign: TextAlign.center),
-                Text(this.campaignDetails.organization.name, style: TextStyle(fontSize: height / 40, color: Colors.white70)),
+                Text(this.campaign.name, style: TextStyle(fontSize: height / 20, color: Colors.white70), textAlign: TextAlign.center),
+                Text(this.campaign.organization.name, style: TextStyle(fontSize: height / 40, color: Colors.white70)),
                 Container(
                     height: height * 0.3,
                     child: Scrollbar(
                       child: SingleChildScrollView(
-                        child: Text(this.campaignDetails.description, style: TextStyle(fontSize: height / 30, color: Colors.white70)),
+                        child: Text(this.campaign.description, style: TextStyle(fontSize: height / 30, color: Colors.white70)),
                         scrollDirection: Axis.vertical,
                       ),
                     )
@@ -62,9 +62,9 @@ class CampaignInfoDialog extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      campaignerDetailRow(Icons.home, this.campaignDetails.organization.address.getPrintableAddress(), height),
-                      campaignerDetailRow(Icons.phone, this.campaignDetails.organization.phone, height),
-                      campaignerDetailRow(Icons.mail_outline, this.campaignDetails.organization.email, height)
+                      campaignerDetailRow(Icons.home, this.campaign.organization.address.getPrintableAddress(), height),
+                      campaignerDetailRow(Icons.phone, this.campaign.organization.phone, height),
+                      campaignerDetailRow(Icons.mail_outline, this.campaign.organization.email, height)
                     ],
                   ),
                 ),
@@ -95,7 +95,7 @@ class CampaignInfoDialog extends StatelessWidget {
 
   bool isAcceptedCampaign() {
     if(currentUser.acceptedCampaigns.length > 0) {
-      if (currentUser.acceptedCampaigns.any((element) => element.id == campaignDetails.id) == true) {
+      if (currentUser.acceptedCampaigns.any((element) => element.id == campaign.id) == true) {
         return true;
       } else {
         return false;
@@ -124,7 +124,7 @@ class CampaignInfoDialog extends StatelessWidget {
           child: Center(
             child: Text("CONTINUE", style: TextStyle(fontSize: width / 18)),
           ),
-          onTap: () => { showInformationSelection(context, currentUser, statusCallback, campaignDetails) },
+          onTap: () => { showInformationSelection(context, currentUser, statusCallback, campaign) },
         ),
       ),
     );
@@ -141,7 +141,7 @@ class CampaignInfoDialog extends StatelessWidget {
             child: Text("DECLINE", style: TextStyle(fontSize: width / 18)),
           ),
           onTap: () {
-            campaignDetails.status = Status.Rejected;
+            campaign.status = Status.Rejected;
             statusCallback(Status.Rejected);
             Navigator.of(context).pop();
           },
@@ -161,7 +161,7 @@ class CampaignInfoDialog extends StatelessWidget {
             child: Text("REVOKE", style: TextStyle(fontSize: height / 10)),
           ),
           onTap: () {
-            campaignDetails.status = Status.Rejected;
+            campaign.status = Status.Rejected;
             currentUser.acceptedCampaigns.removeAt(index);
             statusCallback(Status.Rejected);
             Navigator.of(context).pop();
