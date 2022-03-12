@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-import 'package:campaneo_app/widgets/queryable_campaign_details.dart';
+import 'package:campaneo_app/widgets/campaign_info_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:campaneo_app/widgets/status_widget.dart';
@@ -107,7 +107,7 @@ class _CampaignTileState extends State<CampaignTile> {
   showCampaignInfo(BuildContext context, User currentUser, List newCampaignsList) {
     showDialog(
         context: context,
-        builder: (context) => QueryableCampaignDetails(context, widget.index, newCampaignsList, currentUser, updateStatus, id: widget.campaign.id)
+        builder: (context) => CampaignInfoDialog(context, widget.campaign, currentUser, widget.index, updateStatus)
     );
   }
 
