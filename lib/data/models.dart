@@ -41,10 +41,10 @@ class Campaign {
         this.organization = map['organization'];
 
   String _getFormattedDate(String date) =>
-      DateFormat("dd-MM-yyyy").format(DateTime.parse(date));
+      DateFormat("dd.MM.yyyy").format(DateTime.parse(date));
 
   String getDateRange() =>
-      '${_getFormattedDate(validFrom)} to ${_getFormattedDate(validTo)}';
+      'From ${_getFormattedDate(validFrom)} To ${_getFormattedDate(validTo)}';
 }
 
 class Organization {
