@@ -1,11 +1,11 @@
 import 'dart:ui';
 import 'package:campaneo_app/widgets/information_selection_dialog.dart';
-import 'package:campaneo_app/widgets/queryable_campaign_details.dart';
 import 'package:campaneo_app/widgets/status_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:campaneo_app/data/models.dart';
 import 'package:campaneo_app/data/user.dart';
+import 'package:campaneo_app/data/rest_api.dart';
 
 /// This widget acts as a tile button for the homepage screen. Where other
 /// widgets can be displayed in.
@@ -18,8 +18,9 @@ class CampaignInfoDialog extends StatelessWidget {
   User currentUser;
   int index;
   Function statusCallback;
+  RestApiClient apiClient = new RestApiClient();
 
-  CampaignInfoDialog(this.campaign, this.context, this.currentUser, this.index, this.statusCallback);
+  CampaignInfoDialog(this.context, this.campaign, this.currentUser, this.index, this.statusCallback);
 
   @override
   Widget build(context) {
@@ -39,57 +40,70 @@ class CampaignInfoDialog extends StatelessWidget {
       decoration: BoxDecoration(
         color: HexColor("#3C3C3C"),
       ),
-      child: Stack(
-        children: [
-          Container(
-            padding: EdgeInsets.fromLTRB(40, 10, 40, 10),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Text(this.campaign.name, style: TextStyle(fontSize: height / 20, color: Colors.white70), textAlign: TextAlign.center),
-                Text(this.campaign.organization.name, style: TextStyle(fontSize: height / 40, color: Colors.white70)),
-                Container(
-                    height: height * 0.3,
-                    child: Scrollbar(
-                      child: SingleChildScrollView(
-                        child: Text(this.campaign.description, style: TextStyle(fontSize: height / 30, color: Colors.white70)),
-                        scrollDirection: Axis.vertical,
-                      ),
-                    )
-                ),
-                Container(
-                  alignment: Alignment.centerLeft,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      campaignerDetailRow(Icons.home, this.campaign.organization.address.getPrintableAddress(), height),
-                      campaignerDetailRow(Icons.phone, this.campaign.organization.phone, height),
-                      campaignerDetailRow(Icons.mail_outline, this.campaign.organization.email, height)
-                    ],
-                  ),
-                ),
+      child: FutureBuilder(
+          future: apiClient.fetchOrganizationById(campaign.organizationId),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              campaign.organization = snapshot.data;
+              return Stack(
+                children: [
+                  Container(
+                    padding: EdgeInsets.fromLTRB(40, 10, 40, 10),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Text(this.campaign.name, style: TextStyle(fontSize: height / 20, color: Colors.white70), textAlign: TextAlign.center),
+                        //Text(this.campaign.organization.name, style: TextStyle(fontSize: height / 40, color: Colors.white70)),
+                        Text("Some Org Name", style: TextStyle(fontSize: height / 40, color: Colors.white70)),
+                        Container(
+                            height: height * 0.3,
+                            child: Scrollbar(
+                              child: SingleChildScrollView(
+                                child: Text(this.campaign.description, style: TextStyle(fontSize: height / 30, color: Colors.white70)),
+                                scrollDirection: Axis.vertical,
+                              ),
+                            )
+                        ),
+                        Container(
+                          alignment: Alignment.centerLeft,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              campaignerDetailRow(Icons.home, this.campaign.organization.address.getPrintableAddress(), height),
+                              campaignerDetailRow(Icons.phone, this.campaign.organization.phone, height),
+                              campaignerDetailRow(Icons.mail_outline, this.campaign.organization.email, height)
+                            ],
+                          ),
+                        ),
 
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    continueButton(context, height, width),
-                    isAcceptedCampaign()? revokeButton(context, height, width) : declineButton(context, height, width)
-                  ],
-                ),
-              ],
-            ),
-          ),
-          Container(
-              alignment: Alignment.topRight,
-              child: IconButton(
-                  icon: Icon(Icons.close, color: Colors.white70, size: 30),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  }
-              )
-          ),
-        ],
-      ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            continueButton(context, height, width),
+                            isAcceptedCampaign()? revokeButton(context, height, width) : declineButton(context, height, width)
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                      alignment: Alignment.topRight,
+                      child: IconButton(
+                          icon: Icon(Icons.close, color: Colors.white70, size: 30),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          }
+                      )
+                  ),
+                ],
+              );
+            } else if (snapshot.hasError) {
+              return Center(child: Text('${snapshot.error}'));
+            } else {
+              return Center(child: CircularProgressIndicator());
+            }
+          }
+      )
     );
   }
 
